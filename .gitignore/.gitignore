@@ -1,0 +1,6 @@
+node_modules
+lib
+coverage
+package-lock.json
+.DS_Store
+dist
