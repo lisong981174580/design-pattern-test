@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    #div1 {
+      width: 200px;
+      height: 200px;
+    }
+
+    .red {
+      background: red;
+    }
+  </style>
+  <body>
+    <div id="div1">
+      <a href="#">a2</a>
+      <a href="#">a3</a>
+      <a href="#">a4</a>
+      <a href="#">a5</a>
+      <a href="#">a6</a>
+    </div>
+  </body>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+  <script>
+    // 网页事件代理
+    // const div1 = document.getElementById('div1');
+    // div1.addEventListener('click', function (e) {
+    //   const target = e.target;
+
+    //   if (target.nodeName === 'A') {
+    //     alert(target.innerHTML);
+    //   }
+    // });
+
+    // Jquery 常规用法
+    // $('#div1').click(function() {
+    //   const _this = this;
+
+    //   setTimeout(function() {
+    //     // _this 符合预期
+    //     $(_this).addClass('red');
+    //   }, 1000)
+    // })
+
+    // Jquery $.proxy 
+    $('#div1').click(function() {
+      setTimeout($.proxy(function() {
+        // _this 符合预期
+        $(this).addClass('red');
+      }, this), 1000)
+    })
+
+    // Jquery 观察者模式
+    const callbacks = $.Callbacks();
+
+    callbacks.add(function(info) {
+      console.log('fn1 info', info);
+    })
+
+    callbacks.add(function(info) {
+      console.log('fn2 info', info);
+    })
+
+    callbacks.add(function(info) {
+      console.log('fn3 info', info);
+    })
+
+    callbacks.fire('gogo');
+    callbacks.fire('gogo2')
+  </script>
+</html>

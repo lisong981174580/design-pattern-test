@@ -108,3 +108,70 @@ console.log(p.name);
 const result = p.sum(1,2);
 console.log('result', result);
 p.say();
+
+// 发布订阅模式测试
+import { Observer, Subject } from './observer';
+
+const subject = new Subject();
+const observer1 =  new Observer('observer1', subject);
+const observer2 =  new Observer('observer2', subject);
+const observer3 =  new Observer('observer3', subject);
+
+subject.setState(1);
+subject.setState(2);
+subject.setState(3);
+
+// 代理模式
+import { ProxyImg } from './proxy';
+
+let proxyImg = new ProxyImg('1.png');
+proxyImg.display();
+
+// 网页事件代理见 test.html
+// Jquery $.proxy 见 test.html
+
+let star = {
+  name: '张 xx',
+  age: 25,
+  phone: 'star: 13881222222',
+}
+// Es6 proxy
+let agent = new Proxy(star, {
+  get: function(target, key) {
+    if (key === 'phone') {
+      // 返回经纪人自己电话
+      return 'agent phone: 13881222221';
+    }
+
+    if (key === 'price') {
+      // 明星不报价
+      return 120000;
+    }
+
+    return target[key];
+  },
+
+  set: function(target, key, value) {
+    if (key === 'customPrice') {
+      if (value < 1000000) {
+        throw new Error('价格太低');
+      } else {
+        target[key] = value;
+
+        return true;
+      }
+    }
+  }
+})
+
+// test 
+console.log(agent.name);
+console.log(agent.phone);
+console.log(agent.price);
+console.log(agent.age);
+
+// agent.customPrice = 200;
+// console.log(agent.customPrice);
+
+agent.customPrice = 20000000;
+console.log(agent.customPrice);
