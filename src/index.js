@@ -175,3 +175,69 @@ console.log(agent.age);
 
 agent.customPrice = 20000000;
 console.log(agent.customPrice);
+
+// 迭代器测试
+import { eachIteratorOrObject, mapIteratorOrObject } from 'any-each-or-map'
+
+eachIteratorOrObject({a: 1, b: 2, c: {a: 1, b: 2}}, (key, value) => {
+  console.log(key, value);
+})
+
+eachIteratorOrObject({a: 1, b: 2, c: {a: 1, b: 2}}, function(key, value){
+  console.log(key, value);
+})
+
+eachIteratorOrObject({a: 1, b: 2, c: {a: 1, b: 2}})
+
+eachIteratorOrObject([1,2,3,4], (key, value) => {
+  console.log(key, value);
+})
+
+eachIteratorOrObject(['a','b','c','b'], function(key, value){
+  console.log(key, value);
+})
+
+eachIteratorOrObject(['a','b','c','b'])
+
+
+eachIteratorOrObject('hello', (key, value) => {
+  console.log(key, value);
+})
+
+eachIteratorOrObject('hello', function(key, value){
+  console.log(key, value);
+})
+
+eachIteratorOrObject('hello');
+
+const source = 'hello';
+const mapSource = mapIteratorOrObject(source, (key, value) => {
+  if (key === 0) {
+    return 'a';
+  }
+
+  return value;
+})
+
+console.log('source', source);
+console.log('mapSource', mapSource);
+
+const source2 = {a: 1, b: {a:1}};
+const mapSource2 = mapIteratorOrObject(source2, (key, value) => {
+  if (key === 'b') {
+    return 'b';
+  }
+
+  return value;
+})
+
+console.log('source', source2);
+console.log('mapSource', mapSource2);
+
+const source3 = [1,2,3];
+const mapSource3 = mapIteratorOrObject(source3, (key, value) => {
+  return value + 1;
+})
+
+console.log('source', source3);
+console.log('mapSource', mapSource3);

@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
+    "any-each-or-map": "^1.0.2",
     "core-decorators": "^0.20.0"
   }
 }
