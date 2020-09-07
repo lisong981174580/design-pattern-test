@@ -241,3 +241,10 @@ const mapSource3 = mapIteratorOrObject(source3, (key, value) => {
 
 console.log('source', source3);
 console.log('mapSource', mapSource3);
+
+import { replaceRegexMatchedText } from 'javascript-regex-utils';
+
+console.log(replaceRegexMatchedText('我是中国人${xxxx}', /\${(\w+)}/g, 'allen')); // 我是中国人allen
+console.log(replaceRegexMatchedText('我是中国人${name}', /\${(\w+)}/g, {
+  name: 'allen',
+})); // 我是中国人allen

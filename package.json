@@ -33,6 +33,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
     "any-each-or-map": "^1.0.2",
-    "core-decorators": "^0.20.0"
+    "core-decorators": "^0.20.0",
+    "javascript-regex-utils": "^1.0.1"
   }
 }
